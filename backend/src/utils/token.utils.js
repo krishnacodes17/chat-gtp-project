@@ -13,11 +13,17 @@ function generateToken(userId){
 
 
 
+function verifyToken(token){
+    try {
+        const decode = jwt.verify(token , process.env.JWT_SECRET)
+
+        return decode
+    } catch (error) {
+        throw new Error("invalid Token")
+    }
+}
 
 
 
 
-
-
-
-module.exports = {generateToken}
+module.exports = {generateToken , verifyToken}

@@ -26,7 +26,11 @@ async function loginUserController(req,res) {
     try {
         const result = await authServices.loginUser(req.body)
 
-            res.cookie("token" , result.token)
+            res.cookie("token" , result.token,{
+                httpOnly:true,
+                secure:false,
+                maxAge: 7 * 24 * 60 * 60 * 1000 
+            })
 
         res.status(200).json({
             success:true,
